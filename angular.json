@@ -2,5 +2,46 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "projects",
-  "projects": {}
+  "projects": {
+    "alphabet": {
+      "projectType": "library",
+      "root": "projects/alphabet",
+      "sourceRoot": "projects/alphabet/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/alphabet/tsconfig.lib.json",
+            "project": "projects/alphabet/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/alphabet/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/alphabet/src/test.ts",
+            "tsConfig": "projects/alphabet/tsconfig.spec.json",
+            "karmaConfig": "projects/alphabet/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/alphabet/tsconfig.lib.json",
+              "projects/alphabet/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }},
+  "defaultProject": "alphabet"
 }
